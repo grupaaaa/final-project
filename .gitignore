@@ -285,6 +285,9 @@ fabric.properties
 .idea/**/azureSettings.xml
 .idea/
 
+# db files
+mydatabase
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 
