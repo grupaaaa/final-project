@@ -58,9 +58,18 @@
 <body>
 {% block form %}
 <h1> NATURAL LIFE ORGANIC SHOP</h1>
-<form action="/your-name/" method="post">
+<form action="/address/" method="post">
     <label for="your_name">Your name: </label>
     <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+    <label for="street">Street: </label>
+    <input id="street" type="text" name="street" value="{{ street }}">
+    <input type="submit" value="OK">
+    <label for="city">City: </label>
+    <input id="city" type="text" name="city" value="{{ city }}">
+    <input type="submit" value="OK">
+    <label for="post_code">Post code: </label>
+    <input id="post_code" type="text" name="post_code" value="{{ post_code }}">
     <input type="submit" value="OK">
 </form>
 {% endblock form %}

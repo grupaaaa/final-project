@@ -20,8 +20,10 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from main.views import HomeView
+from main.views import AddressForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', HomeView.as_view()),
+    path('address_form/', AddressForm.as_view()),
 ]
