@@ -1,17 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Category, Product, Storage
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Product, Category
 
-# Create your views here.
-def index(request):
-    allproducts = Product.objects.all()
-    return HttpResponse(allproducts)
 
-def category(request, id):
+def products(request):
+    products = Product.objects.all()
+    return render(request, 'products.html', {'products': products})
+
+def Category(request):
+    all_category = Category.objects.all()
+    data = {'all_category': all_category}
+    return render(request, 'index.html', data)
+
+def Categories(request, id):
     category_user = Category.objects.get(pk=id)
     return HttpResponse(category_user.name)
 
-def product(request, id):
+def Product(request, id):
     product_user = Product.objects.get(pk=id)
     inscription = "<h1>" + str(product_user) + "</h1>" + \
                   "<p>" + str(product_user.price) + "</p1>" + \
