@@ -19,10 +19,15 @@ from Product.views import *
 from Category.vievs import *
 
 
+from django.urls import path
+from django.views.generic import TemplateView
+
+from main.views import HomeView
+
 urlpatterns = [
                 path('admin/', admin.site.urls),
                 path('', index),
                 path('category/<id>/', category, name='category'),
                 path('product/<id>/', product, name='product'),
+                path('base/', HomeView.as_view()),
               ]
-
