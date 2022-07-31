@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Category
-from .models import Product
-from .models import Storage
+from .models import Category, Product, Storage
+
 
 # Register your models here.
 admin.site.register(Category)
