@@ -20,11 +20,13 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from main.views import HomeView
-from address_form.forms import AddressForm
-from address_form.views import get_address
+from address_form.views import AddressFormView, get_address, AddresSuccessfulView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', HomeView.as_view()),
-    path('address_form/', AddressForm),
+    path('address_form/', AddressFormView.as_view()),
+    path('address/', get_address ),
+    path('address/successful/', AddresSuccessfulView.as_view())
 ]
