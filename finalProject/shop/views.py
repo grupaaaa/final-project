@@ -1,25 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Category, Product, Storage
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Product, Category
+from .models import Product, Category, Storage
 
 
-def products(request):
+def all_products(request):
     products = Product.objects.all()
-    return render(request, 'products.html', {'products': products})
+    return render(request, 'all_products.html', {'all_products': all_products})
 
-def Category(request):
+def all_category(request):
     all_category = Category.objects.all()
-    data = {'all_category': all_category}
-    return render(request, 'index.html', data)
+    return render(request, 'all_category.html',{'all_category': all_category})
 
-def Categories(request, id):
+def some_category(request, id):
     category_user = Category.objects.get(pk=id)
     return HttpResponse(category_user.name)
 
-def Product(request, id):
+def some_product(request, id):
     product_user = Product.objects.get(pk=id)
     inscription = "<h1>" + str(product_user) + "</h1>" + \
                   "<p>" + str(product_user.price) + "</p1>" + \
