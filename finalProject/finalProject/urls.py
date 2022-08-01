@@ -14,7 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from shop import views
+from shop.views import (
+    get_products,
+    get_categories,
+    get_category,
+    get_product,
+    ProductListView,
+    ProductDetailView,
+    CategoryListView,
+    CategoryDetailView,
+)
 
 
 
@@ -27,10 +36,15 @@ from main.views import HomeView
 
 urlpatterns = [
                 path('admin/', admin.site.urls),
-                path('', views.all_category, name='all_products'),
-                path('some_category/', views.some_category, name='some_category'),
-                path('some_product/', views.some_product, name='some_product'),
-                path('', views.all_category, name='all_category'),
+                path("products/", get_products, name="products_list"),
+                path("product/<int:id>", get_product, name="product_detail"),
+                path("categories/", get_categories, name="categories_list"),
+                path("category/<int:id>", get_category, name="category_detail"),
                 path('base/', HomeView.as_view()),
+                path("cbv-posts/", ProductListView.as_view(), name="cbv_product_list"),
+                path("cbv-products/<int:id>", ProductDetailView.as_view(), name="cbv_product_detail"),
+                path("cbv-posts/", CategoryListView.as_view(), name="cbv_category_list"),
+                path("cbv-categories/<int:id>", CategoryDetailView.as_view(), name="cbv_category_detail"),
+
 
               ]
