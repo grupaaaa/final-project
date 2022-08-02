@@ -20,7 +20,7 @@ def get_category(request, id: int):
     category = Category.objects.get(id=id)
     ctx = {"category": category}
 
-    except Category.DoesNotExist:
+    except Category.DoesNotExist
     ctx = {"category_id": id}
 
     return render(request, 'get/category.html', context=ctx)
