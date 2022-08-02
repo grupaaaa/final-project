@@ -1,11 +1,12 @@
 <!-- templates/home.html-->
-{% extends 'base.html' %}
+{% extends 'main\base.html' %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}! This is BIO shop
+  Hi {{ user.username }}! This is Natural Life Organic Shop
+
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>

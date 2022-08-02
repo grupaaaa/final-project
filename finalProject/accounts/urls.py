@@ -6,5 +6,5 @@ from accounts.views import register
 urlpatterns = [
     path('', include("django.contrib.auth.urls")),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('register/', register, name = 'register'),
+    path('register/', register, name='register'),
 ]

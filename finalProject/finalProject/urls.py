@@ -20,7 +20,7 @@ from main.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("accounts/", include("accounts.urls"), name="user_login"),
+    path("accounts/", include("accounts.urls"), name="accounts"),
     path('h/', TemplateView.as_view(template_name='home.html'), name='home'),
     path('base/', HomeView.as_view()),
 ]
