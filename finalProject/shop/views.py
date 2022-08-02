@@ -20,17 +20,11 @@ def get_category(request, id: int):
     category = Category.objects.get(id=id)
     ctx = {"category": category}
 
-    except Category.DoesNotExist
-    ctx = {"category_id": id}
-
     return render(request, 'get/category.html', context=ctx)
 
 def get_product(request, id: int):
     product = Product.objects.get(id=id)
     ctx = {"product": product}
-
-    except Product.DoesNotExist:
-    ctx = {"product_id": id}
 
     return render(request, 'get/product.html', context=ctx)
 
@@ -43,11 +37,8 @@ class ProductListView(View):
 
 class ProductDetailView(View):
     def get(self, request, id, *args, **kwargs):
-        try:
-            product = Product.objects.get(id=id)
-            ctx = {"product": product}
-        except Product.DoesNotExist:
-            ctx = {"product_id": id}
+        product = Product.objects.get(id=id)
+        ctx = {"product": product}
 
         return render(self.request, "get/product.html", context=ctx)
 
@@ -58,13 +49,10 @@ class CategoryListView(View):
 
         return render(self.request, "get/categories.html", context=ctx)
 
-class Product(View):
+class CategoryDetailView(View):
     def get(self, request, id, *args, **kwargs):
-        try:
-            category = Category.objects.get(id=id)
-            ctx = {"category": category}
-        except Category.DoesNotExist:
-            ctx = {"category_id": id}
+        category = Category.objects.get(id=id)
+        ctx = {"category": category}
 
         return render(self.request, "get/category.html", context=ctx)
 

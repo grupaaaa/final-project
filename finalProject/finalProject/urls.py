@@ -15,41 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shop.views import (
-    get_products,
-    get_categories,
-    get_category,
-    get_product,
-    ProductListView,
-    ProductDetailView,
-    CategoryListView,
-    CategoryDetailView,
-)
+from shop.views import *
 
 
 
 
-from django.urls import path
+# from django.urls import path
 from django.views.generic import TemplateView
 from main.views import HomeView
+from accounts.views import *
 
 
 urlpatterns = [
                 path('admin/', admin.site.urls),
-                path("products/", get_products, name="products_list"),
-                path("product/<int:id>", get_product, name="product_detail"),
-                path("categories/", get_categories, name="categories_list"),
-                path("category/<int:id>", get_category, name="category_detail"),
                 path('base/', HomeView.as_view()),
+                path("accounts/", include("accounts.urls"), name="accounts"),
+                path('h/', TemplateView.as_view(template_name='home.html'), name='home'),
+                path("products/", get_products, name="products"),
+                path("product/<int:id>", get_product, name="product"),
+                path("categories/", get_categories, name="categories"),
+                path("category/<int:id>", get_category, name="category"),
                 path("cbv-posts/", ProductListView.as_view(), name="cbv_product_list"),
                 path("cbv-products/<int:id>", ProductDetailView.as_view(), name="cbv_product_detail"),
                 path("cbv-posts/", CategoryListView.as_view(), name="cbv_category_list"),
                 path("cbv-categories/<int:id>", CategoryDetailView.as_view(), name="cbv_category_detail"),
-
-
-
-
-                path("accounts/", include("accounts.urls"), name="accounts"),
-                path('h/', TemplateView.as_view(template_name='home.html'), name='home'),
-
 ]

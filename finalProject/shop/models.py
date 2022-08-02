@@ -17,9 +17,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Storage(models.Model):
-    amount = models.IntegerField(default=0)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
-    def __str__(self):
-        return self.name
+# class Storage(models.Model):
+#     amount = models.IntegerField(default=0)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+#
+#     def __str__(self):
+#         return self.name
 
