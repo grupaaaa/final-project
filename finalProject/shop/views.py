@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views import View
+
 from .models import Product, Category, Storage
 
 
@@ -9,28 +11,28 @@ def get_products(request):
     return render(request, 'get/products.html', context=ctx)
 
 def get_categories(request):
-    get_categories = Category.objects.all()
+    categories = Category.objects.all()
     ctx = {'categories': categories}
 
-    return render(request, 'get/categories.html', contex=ctx)
+    return render(request, 'get/categories.html', context=ctx)
 
 def get_category(request, id: int):
-    category_user = Category.objects.get(id=id)
+    category = Category.objects.get(id=id)
     ctx = {"category": category}
 
     except Category.DoesNotExist:
     ctx = {"category_id": id}
 
-    return render(request, 'get/category.html', contex=ctx)
+    return render(request, 'get/category.html', context=ctx)
 
-def get_category(request, id: int):
-    get_product = Product.objects.get(id=id)
+def get_product(request, id: int):
+    product = Product.objects.get(id=id)
     ctx = {"product": product}
 
     except Product.DoesNotExist:
     ctx = {"product_id": id}
 
-    return render(request, 'get/product.html', contex=ctx)
+    return render(request, 'get/product.html', context=ctx)
 
 class ProductListView(View):
     def get(self, request, *args, **kwargs):
@@ -56,7 +58,7 @@ class CategoryListView(View):
 
         return render(self.request, "get/categories.html", context=ctx)
 
-class CategoryDetailView(View):
+class Product(View):
     def get(self, request, id, *args, **kwargs):
         try:
             category = Category.objects.get(id=id)
