@@ -1,8 +1,13 @@
 from django import forms
-from django.views.generic import TemplateView
+from .models import ShippingAddress
 
-class AddressForm(forms.Form):
-    name = forms.CharField(label='name', max_length=100)
-    street = forms.CharField(label="street", max_length=100)
-    city = forms.CharField(label="city", max_length=100)
-    post_code = forms.CharField(label="post_code", max_length=6)
+
+class AddressForm(forms.ModelForm):
+    address_line_1 = forms.CharField(label='address_line_1', max_length=50)
+    address_line_2 = forms.CharField(label="address_line_2", max_length=50)
+    city = forms.CharField(label="city", max_length=50)
+    zipcode = forms.CharField(label="zipcode", max_length=5)
+
+    class Meta:
+        model = ShippingAddress
+        fields = ["address_line_1", "address_line_2", "city", "zipcode"]

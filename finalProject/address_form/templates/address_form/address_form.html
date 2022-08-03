@@ -59,14 +59,14 @@
 {% block form %}
 <h1> NATURAL LIFE ORGANIC SHOP</h1>
 <form action="/address/" method="post">
-    <label for="name">Name: </label>
-    <input id="name" type="text" name="name" value="{{ current_name }}">
-    <label for="street">Street: </label>
-    <input id="street" type="text" name="street" value="{{ street }}">
+    <label for="address_line_1">Address line 1:: </label>
+    <input id="address_line_1" type="text" name="address_line_1" value="{{ address_line_1 }}">
+    <label for="address_line_2">Address line 2: </label>
+    <input id="address_line_2" type="text" name="address_line_2" value="{{ address_line_2 }}">
     <label for="city">City: </label>
     <input id="city" type="text" name="city" value="{{ city }}">
-    <label for="post_code">Post code: </label>
-    <input id="post_code" type="text" name="post_code" value="{{ post_code }}">
+    <label for="zipcode">Zipcode: </label>
+    <input id="zipcode" type="text" name="zipcode" value="{{ zipcode }}">
     <input type="submit" value="OK">
 </form>
 {% endblock form %}
