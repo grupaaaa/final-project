@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1 class="head">{{ category.category }}</h1>
 
-</body>
-</html>
+<h3>Products for this category</h3>
+<div>
+    {% for product in products %}
+    <div>
+        <h5>{{ product.title }}<h5/>
+        <div>{{ product.description }}</div>
+        <img src="{{ product.image.url }}"/>
+    </div>
+    {% endfor %}
+</div>

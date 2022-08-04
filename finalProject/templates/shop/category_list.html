@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<h1 class="head">Products Categories</h1>
+{% for cat in categories %}
+<div>
+    <a href="{% url 'category-detail' cat.slug %}">
+        <h3>{{ cat.category }}</h3>
+    </a>
+</div>
+{% endfor %}
+</div>

@@ -31,12 +31,9 @@ urlpatterns = [
                 path('base/', HomeView.as_view()),
                 path("accounts/", include("accounts.urls"), name="accounts"),
                 path('h/', TemplateView.as_view(template_name='home.html'), name='home'),
-                path("products/", get_products, name="products"),
-                path("product/<int:id>", get_product, name="product"),
-                path("categories/", get_categories, name="categories"),
-                path("category/<int:id>", get_category, name="category"),
-                path("cbv-posts/", ProductListView.as_view(), name="cbv_product_list"),
-                path("cbv-products/<int:id>", ProductDetailView.as_view(), name="cbv_product_detail"),
-                path("cbv-posts/", CategoryListView.as_view(), name="cbv_category_list"),
-                path("cbv-categories/<int:id>", CategoryDetailView.as_view(), name="cbv_category_detail"),
+                path('category/', CategoryListView.as_view(), name='category-list'),
+                path('category/<slug:slug>/', CategoryDetailView.as_view(), name='category-detail'),
+                path('product/<slug:slug>/', ProductDetailView.as_view(), name='product'),
+                # path("products/", get_products, name="products"), #do poprawy
+
 ]
