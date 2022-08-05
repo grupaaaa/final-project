@@ -5,7 +5,10 @@
         <div>
           <img src="{{ product.image.url }}">
           <div>
-            <h3> {{ product.title }}</h3>
+            <h3> {{ product.name }}</h3>
+             <h3> {{ product.price }}</h3>
+            <h3> {{ product. measurement_unit }}</h3>
+            <h3> {{ product.availability }}</h3>
             <p> {{ product.description|linebreaks }}</p>
           </div>
         </div>

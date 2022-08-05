@@ -1,44 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views import View
 
 
 from .models import Product, Category
 
-class ProductView(View):
-    def get(self, request, *args, **kwargs):
-
-        products = Product.objects.filter(is_active = True) #tutaj do poprawki
-
-
-        context = {
-            'products': products,
-        }
-
-        return render(request, 'shop/products.html', context)
 
 class ProductDetailView(View):
-    def get(self, request, slug):
-        product = Product.objects.get(slug = slug)
-        context = {
-            'product': product
-        }
-        return render(request, 'shop/productdetail.html', context)
+    model = Product
+    context_object_name = 'product'
+    template_name = 'shop/product_detail.html'
+    queryset = Product.objects.all()
+
+    def get_object(self):
+        id = self.kwargs.get('id')
+        return get_object_or_404(Product, id=id)
 
 class CategoryListView(ListView):
     model = Category
-    context_object_name = 'categories'
-    template_name = 'category_list.html'
+    context_object_name = 'category'
+    template_name = 'shop/category_list.html'
 
 
 class CategoryDetailView(DetailView):
     model = Category
     context_object_name = 'category'
-    template_name = 'category_detail.html'
+    template_name = 'shop/category_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = self.product_set.all()
+        context['product'] = Product.objects.all()
         return context
 
 

@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=255)
     def __str__(self):
         return self.name
 
@@ -15,7 +14,6 @@ class Product(models.Model):
         max_length=250, default='', blank=True, null=True)
     measurement_unit = models.CharField(max_length=200,null=True)
     availability = models.BooleanField()
-    slug = models.SlugField(max_length=255, unique=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     def __str__(self):
         return self.name

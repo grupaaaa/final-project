@@ -5,7 +5,7 @@
     {% for product in products %}
     <div>
         <h5>{{ product.title }}<h5/>
-        <div>{{ product.description }}</div>
+        <div>{{ product.price }}</div>
         <img src="{{ product.image.url }}"/>
     </div>
     {% endfor %}

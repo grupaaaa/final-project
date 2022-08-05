@@ -1,9 +1,10 @@
-<h1 class="head">Products Categories</h1>
-{% for cat in categories %}
+
 <div>
-    <a href="{% url 'category-detail' cat.slug %}">
-        <h3>{{ cat.category }}</h3>
-    </a>
-</div>
-{% endfor %}
+
+    {% for category in category_list %}
+    <li>{{ category.name }}</li>
+<hr/>
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
 </div>

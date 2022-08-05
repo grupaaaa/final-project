@@ -10,12 +10,12 @@ from django.urls import path
 
 
 
-
+app_name = 'shop'
 urlpatterns = [
-                path('category/', CategoryListView.as_view(), name='category-list'),
-                path('category/<slug:slug>/', CategoryDetailView.as_view(), name='category-detail'),
-                path('product/<slug:slug>/', ProductDetailView.as_view(), name='product'),
-                # path("products/", get_products, name="products"), #do poprawy
+                path('', CategoryListView.as_view(), name='category_list'),
+                path('<int:id>', CategoryDetailView.as_view(), name='category_detail'),
+                path('<int:id>', ProductDetailView.as_view(), name='product_detail'),
+
 
 
 
