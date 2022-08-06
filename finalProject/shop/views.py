@@ -13,12 +13,12 @@ class ProductDetailView(View):
     queryset = Product.objects.all()
 
     def get_object(self):
-        id = self.kwargs.get('id')
-        return get_object_or_404(Product, id=id)
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Product, pk=id)
 
 class CategoryListView(ListView):
     model = Category
-    context_object_name = 'category'
+    context_object_name = 'categories'
     template_name = 'shop/category_list.html'
 
 
@@ -29,7 +29,8 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product'] = Product.objects.all()
+        # context['products'] = Product.objects.all()
+        context['products'] = Product.objects.filter(category = self.get_object())
         return context
 
 
