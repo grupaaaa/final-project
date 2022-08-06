@@ -4,20 +4,26 @@
   
 <div class = "login">  
   
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}  
-      
-    <h1>Register Here</h1>
+
+    <h2>Register Here</h2>
   
          <form method="post" >  
-             {% csrf_token %}  
+             {% csrf_token %}
+                     {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+
+
+        {% for field in form %}
+              {{ field.label_tag }}
+            {{ field }}
+
+            {{ field.errors.as_ul }}
+        {% endfor %}
              <table>  
-                {{ form.as_table }}  
+{#                {{ form.as_table }}#}
                  <tr>  
                     <td></td>  
                     <td><input type="submit" name="submit" value="Register" /></td>  

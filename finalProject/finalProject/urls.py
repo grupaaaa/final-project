@@ -19,13 +19,17 @@ from django.views.generic import TemplateView
 from main.views import HomeView
 from address_form.views import AddressFormView, get_address, AddresSuccessfulView
 
+from accounts.views import profile_functionalities, basket_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls"), name="accounts"),
-    path('h/', TemplateView.as_view(template_name='home.html'), name='home'),
     path('base/', HomeView.as_view()),
     path('address_form/', AddressFormView.as_view()),
     path('address/', get_address ),
     path('address/successful/', AddresSuccessfulView.as_view())
+    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('profile/', profile_functionalities, name='profile'),
+    path('basket/', basket_view, name='basket'),
+
 ]
