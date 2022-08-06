@@ -1,0 +1,10 @@
+
+<div>
+
+    {% for category in category_list %}
+    <li>{{ category.name }}</li>
+<hr/>
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
+</div>

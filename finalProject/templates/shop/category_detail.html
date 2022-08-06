@@ -1,0 +1,12 @@
+<h1 class="head">{{ category.category }}</h1>
+
+<h3>Products for this category</h3>
+<div>
+    {% for product in products %}
+    <div>
+        <h5>{{ product.name }}<h5/>
+        <div>{{ product.price }}</div>
+        <img src="{{ product.image.url }}"/>
+    </div>
+    {% endfor %}
+</div>
