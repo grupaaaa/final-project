@@ -1,0 +1,11 @@
+<!-- templates/account.html-->
+{% extends 'main\base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}! You are already loged in. Enjoy your shopp.
+
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% endif %}
+{% endblock %}
