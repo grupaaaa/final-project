@@ -30,8 +30,8 @@ urlpatterns = [
                 path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
                 path('shop/', include('shop.urls'), name='shop'),
                 path('address_form/', AddressFormView.as_view()),
-                path('address/', get_address ),
-                path('address/successful/', AddresSuccessfulView.as_view())
+                path('address/', get_address),
+                path('address/successful/', AddresSuccessfulView.as_view()),
                 path('profile/', profile_functionalities, name='profile'),
                 path('basket/', basket_view, name='basket'),
 
