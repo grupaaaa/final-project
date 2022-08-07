@@ -34,5 +34,4 @@ urlpatterns = [
     path('address/successful/', AddresSuccessfulView.as_view()),
     path('profile/', profile_functionalities, name='profile'),
     # path('basket/', basket_view, name='basket'),
-
 ]

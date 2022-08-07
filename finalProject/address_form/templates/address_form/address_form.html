@@ -58,7 +58,7 @@
 <body>
 {% block form %}
 <h1> NATURAL LIFE ORGANIC SHOP</h1>
-<form action="/address/" method="post">
+<form action="/address/" method="post">{% csrf_token %}
     <label for="address_line_1">Address line 1:: </label>
     <input id="address_line_1" type="text" name="address_line_1" value="{{ address_line_1 }}">
     <label for="address_line_2">Address line 2: </label>
