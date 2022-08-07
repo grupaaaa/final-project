@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from shop.models import Product, Order
 
 User = get_user_model()
 
@@ -43,3 +46,6 @@ def profile_functionalities(request):
 
 def basket_view(request):
     return render(request,'basket.html')
+
+
+
