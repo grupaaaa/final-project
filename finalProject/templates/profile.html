@@ -6,7 +6,7 @@
         Hi {{ user.username }}! This is your account.
     {% else %}
 
-<form action={% url "/accounts/login/" %} method="post">
+<form action= {% url "accounts:login" %} method="post">
 {% csrf_token %}
     {{ login_form }}
     <input type="submit" value="Submit">
