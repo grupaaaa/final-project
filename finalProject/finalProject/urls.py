@@ -23,6 +23,8 @@ from address_form.views import AddressFormView, get_address, AddresSuccessfulVie
 
 from accounts.views import profile_functionalities, basket_view
 
+from shop.views import BreadAndBakingGoodsView, DairyProductsView, FruitAndVegetablesView, JuicesAndDrinksView, MeatView
+
 urlpatterns = [
                 path('admin/', admin.site.urls),
                 path('base/', HomeView.as_view()),
@@ -34,5 +36,9 @@ urlpatterns = [
                 path('address/successful/', AddresSuccessfulView.as_view()),
                 path('profile/', profile_functionalities, name='profile'),
                 path('basket/', basket_view, name='basket'),
-
+                path('home/bread_and_baking_goods', BreadAndBakingGoodsView.as_view()),
+                path('home/dairy_products', DairyProductsView.as_view()),
+                path('home/fruit_and_vegetables', FruitAndVegetablesView.as_view()),
+                path('home/juices_and_drinks', JuicesAndDrinksView.as_view()),
+                path('home/meat', MeatView.as_view()),
 ]

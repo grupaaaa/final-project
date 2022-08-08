@@ -32,13 +32,21 @@ class CategoryDetailView(DetailView):
         context['products'] = Product.objects.filter(category = self.get_object())
         return context
 
+class BreadAndBakingGoodsView(TemplateView):
+    template_name = "bread_and_baking_goods.html"
+
+class DairyProductsView(TemplateView):
+    template_name = "dairy_products.html"
+
+class FruitAndVegetablesView(TemplateView):
+    template_name = "fruit_and_vegetables.html"
+
+class JuicesAndDrinksView(TemplateView):
+    template_name = "juices_and_drinks.html"
 
 
-
-
-
-
-
+class MeatView(TemplateView):
+    template_name = "meat.html"
 
 
 
