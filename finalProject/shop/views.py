@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
-
 
 from .models import Product, Category
 
@@ -32,6 +31,7 @@ class CategoryDetailView(DetailView):
         # context['products'] = Product.objects.all()
         context['products'] = Product.objects.filter(category = self.get_object())
         return context
+
 
 
 

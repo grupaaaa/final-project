@@ -16,6 +16,10 @@
                 footer {background-color: lightgray;
                         height: 50px;}
                 h1 {text-align: center;}
+                .center {display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;}
             </style>
         {% endblock style %}
         </head>
@@ -61,7 +65,7 @@
                             Shop
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Fruit and Vegetables</a>
+                            <a class="dropdown-item" href="templates/fruit_and_vegetables.html">Fruit and Vegetables</a>
                             <a class="dropdown-item" href="#">Bread and Baking Goods</a>
                             <a class="dropdown-item" href="#">Dairy Products</a>
                             <a class="dropdown-item" href="#">Meat</a>
@@ -122,7 +126,7 @@
     </body>
 
 
-<footer class="page-footer font-small purple pt-4 fixed-bottom">
+<footer class="page-footer font-small purple pt-4 ">
   <!-- Copyright -->
   <div class="footer-copyright text-center p-0">
     <p>Copyright &copy; Natural Life Organic Shop 2022</p>
