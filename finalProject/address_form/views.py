@@ -16,8 +16,8 @@ class AddressFormView(TemplateView):
 class AddresSuccessfulView(TemplateView):
     template_name = "address_form/address_successful.html"
 
-#TODO:Once login ready delete line below
-@csrf_exempt
+
+
 def get_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
