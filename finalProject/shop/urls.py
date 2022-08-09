@@ -16,7 +16,3 @@ urlpatterns = [
     path('basket/', order_detail, name='basket'),
 
 ]
-
-
-
-
