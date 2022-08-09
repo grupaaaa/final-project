@@ -7,6 +7,7 @@ from django.views import View
 from .models import Product, Category, Order, OrderStatusChoice
 
 
+
 def get_product_detail(request, id):
     product = Product.objects.get(id=id)
     context = {'product': product}
@@ -31,6 +32,12 @@ class CategoryDetailView(DetailView):
         context['products'] = Product.objects.filter(category = self.get_object())
         return context
 
+class BreadAndBakingGoodsView(TemplateView):
+    template_name = "bread_and_baking_goods.html"
+
+
+class DairyProductsView(TemplateView):
+    template_name = "dairy_products.html"
 
 @login_required(login_url="/users/login")
 def order_add(request, id):
@@ -84,15 +91,15 @@ def order_detail(request):
 #
 #
 
+class FruitAndVegetablesView(TemplateView):
+    template_name = "fruit_and_vegetables.html"
+
+class JuicesAndDrinksView(TemplateView):
+    template_name = "juices_and_drinks.html"
 
 
-
-
-
-
-
-
-
+class MeatView(TemplateView):
+    template_name = "meat.html"
 
 
 
