@@ -7,7 +7,7 @@
 </center>
 
 ## About us
-Hello, we are group of for girls which finishing Python from basic course in SDA Programing School. 
+Hello, we are group of four girls which finishing Python from basic course in SDA Programing School. 
 We decided to write some code with django to create an online store.
 
 
