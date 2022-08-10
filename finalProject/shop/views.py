@@ -4,13 +4,25 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
 
 
+
 from .models import Product, Category, Order, OrderStatusChoice
 
 
 
+# class ProductDetailView(View):
+#     model = Product
+#     context_object_name = 'product'
+#     template_name = 'shop/product_detail.html'
+#     queryset = Product.objects.all()
+#
+#     def get_object(self):
+#         pk = self.kwargs.get('pk')
+#         return get_object_or_404(Product, pk=id)
+
 def get_product_detail(request, id):
     product = Product.objects.get(id=id)
     context = {'product': product}
+
 
     return render(request, "shop/product_detail.html",context)
 
@@ -29,7 +41,8 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.filter(category = self.get_object())
+        context['products'] = Product.objects.filter(category=self.get_object())
+
         return context
 
 class BreadAndBakingGoodsView(TemplateView):

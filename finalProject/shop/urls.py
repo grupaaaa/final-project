@@ -5,14 +5,12 @@ from shop.views import get_categories, CategoryDetailView, get_product_detail, o
 from django.urls import path
 
 
-
-
 app_name = 'shop'
 urlpatterns = [
-    path("categories/", get_categories, name="category_list"),
-    path('category/<int:pk>', CategoryDetailView.as_view(), name='category_detail'),
-    path('product/<int:id>', get_product_detail, name='product_detail'),
-    path('order_add/<int:id>', order_add, name='order_add'),
-    path('basket/', order_detail, name='basket'),
+                path('category/<int:pk>', CategoryDetailView.as_view(), name='category_detail'),
+                path("categories/", get_categories, name="category_list"),
+                path('product/<int:id>', get_product_detail, name='product_detail'),
+                path('order_add/<int:id>', order_add, name='order_add'),
+                path('basket/', order_detail, name='basket'),
 
 ]
