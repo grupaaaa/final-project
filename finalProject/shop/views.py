@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
@@ -69,6 +70,37 @@ def order_detail(request):
     ctx = {"order": order}
 
     return render(request, "shop/basket.html", context=ctx)
+@login_required(login_url="/users/login")
+def basket_detail(request):
+    basket = Order(request)
+    products = []
+    for products in basket:
+        products['update_quantity_form'] = order_add(initial={'quantity': products['quantity'], 'update': True})
+        products.append(product)
+    context = {"basket": basket}
+    context["products"] = products
+    return render(request, 'shop/basket.html', context)
+
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['products'] = Product.objects.all()
+#
+#         return context
+
+
+@login_required(login_url="/users/login")
+def update_order(request,id):
+    order=Order.objects.all()
+    try:
+        product=Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        pass
+    if not product in order.products_set.all():
+        order.products_set.add(product)
+    else:
+        order.products_set.remove(product)
+    return HttpResponseRedirect("shop/basket.html")
 
 
 

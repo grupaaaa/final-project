@@ -4,4 +4,9 @@
 
 {% block content %}
 Hi {{ user.username }}! This is your basket.
-{% endblock %}
+{%endblock content%}}
+
+{% for product in order.products_set.all %}
+
+<p>{{ product.name }}</p>
+{% endfor %}
