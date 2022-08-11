@@ -9,7 +9,6 @@ from django.views import View
 from .models import Product, Category, Order, OrderStatusChoice
 
 
-
 # class ProductDetailView(View):
 #     model = Product
 #     context_object_name = 'product'
@@ -64,43 +63,38 @@ def order_add(request, id):
 
     return redirect("home")
 
-@login_required(login_url="/users/login")
-def order_detail(request):
-    order = Order.objects.all()
-    ctx = {"order": order}
-
-    return render(request, "shop/basket.html", context=ctx)
-@login_required(login_url="/users/login")
-def basket_detail(request):
-    basket = Order(request)
-    products = []
-    for products in basket:
-        products['update_quantity_form'] = order_add(initial={'quantity': products['quantity'], 'update': True})
-        products.append(product)
-    context = {"basket": basket}
-    context["products"] = products
-    return render(request, 'shop/basket.html', context)
-
+# @login_required(login_url="/users/login")
+# def order_detail(request):
+#     order = Order.objects.all()
+#     ctx = {"order": order}
 #
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['products'] = Product.objects.all()
-#
-#         return context
-
+#     return render(request, "shop/basket.html", context=ctx)
 
 @login_required(login_url="/users/login")
-def update_order(request,id):
-    order=Order.objects.all()
-    try:
-        product=Product.objects.get(id=id)
-    except Product.DoesNotExist:
-        pass
-    if not product in order.products_set.all():
-        order.products_set.add(product)
-    else:
-        order.products_set.remove(product)
-    return HttpResponseRedirect("shop/basket.html")
+class OrderDetailView(DetailView):
+    model = Order
+    context_object_name = 'order'
+    template_name = 'shop/basket.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.filter(order=self.get_object())
+
+        return context
+
+
+# @login_required(login_url="/users/login")
+# def update_order(request,id):
+#     order=Order.objects.all()
+#     try:
+#         product=Product.objects.get(id=id)
+#     except Product.DoesNotExist:
+#         pass
+#     if not product in order.products_set.all():
+#         order.products_set.add(product)
+#     else:
+#         order.products_set.remove(product)
+#     return HttpResponseRedirect("shop/basket.html")
 
 
 

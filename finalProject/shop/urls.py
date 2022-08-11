@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from shop.views import get_categories, CategoryDetailView, get_product_detail, order_add,order_detail, basket_detail, update_order
+from shop.views import get_categories, CategoryDetailView, get_product_detail, order_add, OrderDetailView
 
 from django.urls import path
 
@@ -11,7 +11,7 @@ urlpatterns = [
                 path("categories/", get_categories, name="category_list"),
                 path('product/<int:id>', get_product_detail, name='product_detail'),
                 path('order_add/<int:id>', order_add, name='order_add'),
-                path('basket/', order_detail, name='basket'),
-
-                path('basket/update/<int:id>/', update_order, name='update_order'),
+                # path('basket/', order_detail, name='basket'),
+                path('basket_detail/<int:pk>', OrderDetailView, name= "basket")
+                # path('basket/update/<int:id>/', update_order, name='update_order'),
 ]
