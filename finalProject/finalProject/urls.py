@@ -30,7 +30,8 @@ urlpatterns = [
                 path('admin/', admin.site.urls),
                 path('base/', HomeView.as_view()),
                 path("accounts/", include("accounts.urls"), name="accounts"),
-                path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+                # path('home/', TemplateView.as_view(template_name='home.html'), name='home'), ##czy tak może zostać?
+                path('home/', HomeView.as_view(template_name='home.html'), name='home'),
                 path('shop/', include('shop.urls'), name='shop'),
                 path('address_form/', AddressFormView.as_view()),
                 path('address/', get_address),
