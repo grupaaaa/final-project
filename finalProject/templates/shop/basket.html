@@ -1,18 +1,48 @@
-<!-- templates/home.html-->
 {% extends 'main\base.html' %}
-
-{% for order in orders %}
-
-{% endfor %}
-
+{% load static %}
 {% block content %}
-Hi {{ user.username }}! This is your basket.
+     <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th><h5>Items: <strong>     </strong></h5></th>
+                        <th><h5>Total:<strong>      </strong></h5></th>
+                        <th>
+                            <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'shop:checkout' %}">Checkout</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
 
-        <p>{{ product.name }}</p>
-        <p>{{ product.price }}</p>
-         <p>{{ order.quantity }}</p>
-        <p>{{ order.status }}</p>
-{%endblock%}
+            <br>
 
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2"><strong>Item</strong></div>
+                    <div style="flex:1"><strong>Price</strong></div>
+                    <div style="flex:1"><strong>Quantity</strong></div>
+                    <div style="flex:1"><strong>Total</strong></div>
+                </div>
+                {% for item in items %}
+                    <div class="cart-row">
+                        <ul>{{order.get_cart_items}}</ul>
+                        <div style="flex:2"><p>{{ item.product.name }}</p></div>
+                        <div style="flex:1"><p>R{{ item.product.price|floatformat:2 }}</p></div>
+                        <div style="flex:1">
+                            <p class="quantity">{{ item.quantity }}</p>
+                            <div class="quantity"></div>
+                        </div>
+                        <div style="flex:1"><p>$32</p></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
 
 

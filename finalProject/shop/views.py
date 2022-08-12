@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-from .models import Product, Category, Order, OrderStatusChoice
+from .models import Product, Category, Order, OrderStatusChoice, OrderItem
 
 
 def get_product_detail(request, id):
@@ -42,36 +43,55 @@ class BreadAndBakingGoodsView(TemplateView):
 class DairyProductsView(TemplateView):
     template_name = "dairy_products.html"
 
-
-@login_required(login_url="/users/login")
-def order_add(request, id):
-    user = request.user
-    order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
-    product = Product.objects.get(id=id)
-    # order.product_set.add(product)
-    if "add_product_to_basket" in request.POST:
-        order.product_set.add(product)
-
-    return redirect("home")
-
-@login_required(login_url="/users/login")
-def order_detail(request):
-    order = Order.objects.all()
-    ctx = {"order": order}
-
-    return render(request, "shop/basket.html", context=ctx)
+#
 
 # @login_required(login_url="/users/login")
-class OrderDetailView(DetailView):
-    model = Product
-    context_object_name = 'product'
-    template_name = 'shop/basket.html'
+# def order_add(request, id):
+#     user = request.user
+#     order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
+#     item = Product.objects.get(id=id)
+#     # order.item_set.add(item)
+#     if "add_product_to_basket" in request.POST:
+#         order.item_set.add(item)
+#
+#     return redirect("home")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['orders'] = Order.objects.filter(product=self.get_object())
+# @login_required(login_url="/users/login")
+# def cart(request):
+#     item = OrderItem.objects.all()
+#     ctx = {"item": item}
+#
+#     return render(request, "shop/basket.html", context=ctx)
 
-        return context
+def cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+
+    context= {'items': items,
+              'order': order}
+    return render(request, 'shop/basket.html', context)
+
+def checkout(request):
+    context = {}
+    return render(request, 'shop/checkout.html', context)
+
+
+#
+# # @login_required(login_url="/users/login")
+# class OrderDetailView(LoginRequiredMixin,DetailView):
+#     model = Product
+#     context_object_name = 'product'
+#     template_name = 'shop/checkout.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['orders'] = Order.objects.filter(product=self.get_object())
+#
+#         return context
 
 
 # @login_required(login_url="/users/login")

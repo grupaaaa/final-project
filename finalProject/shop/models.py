@@ -20,14 +20,19 @@ class Product(models.Model):
     measurement_unit = models.CharField(max_length=200,null=True)
     availability = models.BooleanField()
     image = models.ImageField(upload_to='images', null=True, blank=True)
-    order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
+    # order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-class Storage(models.Model):
-    amount = models.IntegerField(default=0)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+# class Storage(models.Model):
+#     amount = models.IntegerField(default=0)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+#
+#     def __str__(self):
+#         return self.name
+
+
 
     def __str__(self):
         return self.name
@@ -43,15 +48,25 @@ class OrderStatusChoice(models.TextChoices):
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     status = models.CharField(max_length=20, default=OrderStatusChoice.INITIAL, choices=OrderStatusChoice.choices)
-    quantity = models.IntegerField(default=1)
+    # quantity = models.IntegerField(default=1)
     address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    items = models.ManyToManyField(OrderItem)
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
 
     def __str__(self):
         return f"Ordered by: {self.customer}, at: {self.order_date}"
 
 
-
+class OrderItem(models.Model):
+    item = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.IntegerField(default=1)
+    # customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 
