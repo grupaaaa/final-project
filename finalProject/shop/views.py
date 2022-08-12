@@ -45,12 +45,6 @@ class CategoryDetailView(DetailView):
 
         return context
 
-class BreadAndBakingGoodsView(TemplateView):
-    template_name = "bread_and_baking_goods.html"
-
-
-class DairyProductsView(TemplateView):
-    template_name = "dairy_products.html"
 
 @login_required(login_url="/users/login")
 def order_add(request, id):
@@ -102,17 +96,59 @@ def order_detail(request):
 #     cart.clear()
 #     return redirect("cart_detail")
 #
-#
+class BreadAndBakingGoodsView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "bread_and_baking_goods.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+    # def context_category(self, **kwargs):
+    #     context = super().get_context_category(**kwargs)
+    #     context['products'] = Product.objects.filter(category=self.get_object())
+    #
+    #     return context
+
+
+class DairyProductsView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "dairy_products.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 
 class FruitAndVegetablesView(TemplateView):
+    context_object_name = 'categories'
     template_name = "fruit_and_vegetables.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 class JuicesAndDrinksView(TemplateView):
+    context_object_name = 'categories'
     template_name = "juices_and_drinks.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class MeatView(TemplateView):
+    context_object_name = 'categories'
     template_name = "meat.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 
