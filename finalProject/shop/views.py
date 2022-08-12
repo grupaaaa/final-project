@@ -9,16 +9,6 @@ from django.views import View
 from .models import Product, Category, Order, OrderStatusChoice
 
 
-# class ProductDetailView(View):
-#     model = Product
-#     context_object_name = 'product'
-#     template_name = 'shop/product_detail.html'
-#     queryset = Product.objects.all()
-#
-#     def get_object(self):
-#         pk = self.kwargs.get('pk')
-#         return get_object_or_404(Product, pk=id)
-
 def get_product_detail(request, id):
     product = Product.objects.get(id=id)
     context = {'product': product}
@@ -52,6 +42,7 @@ class BreadAndBakingGoodsView(TemplateView):
 class DairyProductsView(TemplateView):
     template_name = "dairy_products.html"
 
+
 @login_required(login_url="/users/login")
 def order_add(request, id):
     user = request.user
@@ -63,22 +54,22 @@ def order_add(request, id):
 
     return redirect("home")
 
-# @login_required(login_url="/users/login")
-# def order_detail(request):
-#     order = Order.objects.all()
-#     ctx = {"order": order}
-#
-#     return render(request, "shop/basket.html", context=ctx)
-
 @login_required(login_url="/users/login")
+def order_detail(request):
+    order = Order.objects.all()
+    ctx = {"order": order}
+
+    return render(request, "shop/basket.html", context=ctx)
+
+# @login_required(login_url="/users/login")
 class OrderDetailView(DetailView):
-    model = Order
-    context_object_name = 'order'
+    model = Product
+    context_object_name = 'product'
     template_name = 'shop/basket.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.filter(order=self.get_object())
+        context['orders'] = Order.objects.filter(product=self.get_object())
 
         return context
 

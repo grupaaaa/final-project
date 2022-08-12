@@ -45,16 +45,13 @@ class Order(models.Model):
     status = models.CharField(max_length=20, default=OrderStatusChoice.INITIAL, choices=OrderStatusChoice.choices)
     quantity = models.IntegerField(default=1)
     address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, blank=True, null=True)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"Ordered by: {self.customer}, at: {self.order_date}"
 
-# class Cart(models.Model):
-#     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.IntegerField(default=1)
-#     price = models.DecimalField(max_digits=12, decimal_places=2)
+
+
 
 
 

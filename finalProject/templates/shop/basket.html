@@ -1,12 +1,18 @@
 <!-- templates/home.html-->
 {% extends 'main\base.html' %}
 
+{% for order in orders %}
+
+{% endfor %}
 
 {% block content %}
 Hi {{ user.username }}! This is your basket.
-{%endblock content%}}
 
-{% for product in order.products_set.all %}
+        <p>{{ product.name }}</p>
+        <p>{{ product.price }}</p>
+         <p>{{ order.quantity }}</p>
+        <p>{{ order.status }}</p>
+{%endblock%}
 
-<p>{{ product.name }}</p>
-{% endfor %}
+
+

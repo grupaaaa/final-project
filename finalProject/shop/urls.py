@@ -7,11 +7,11 @@ from django.urls import path
 
 app_name = 'shop'
 urlpatterns = [
-                path('category/<int:pk>', CategoryDetailView.as_view(), name='category_detail'),
-                path("categories/", get_categories, name="category_list"),
-                path('product/<int:id>', get_product_detail, name='product_detail'),
-                path('order_add/<int:id>', order_add, name='order_add'),
-                # path('basket/', order_detail, name='basket'),
-                path('basket_detail/<int:pk>', OrderDetailView, name= "basket")
-                # path('basket/update/<int:id>/', update_order, name='update_order'),
+    path('category/<int:pk>', CategoryDetailView.as_view(), name='category_detail'),
+    path("categories/", get_categories, name="category_list"),
+    path('product/<int:id>', get_product_detail, name='product_detail'),
+    path('order_add/<int:id>', order_add, name='order_add'),
+    # path('basket/', order_detail, name='basket'),
+    path('basket_detail/<int:pk>', OrderDetailView.as_view(), name='basket_detail'),
+
 ]
