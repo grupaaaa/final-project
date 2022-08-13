@@ -28,13 +28,13 @@
                     <div style="flex:1"><strong>Quantity</strong></div>
                     <div style="flex:1"><strong>Total</strong></div>
                 </div>
-                {% for item in items %}
+                {% for product in object.order.product_set %}
                     <div class="cart-row">
-                        <ul>{{order.get_cart_items}}</ul>
-                        <div style="flex:2"><p>{{ item.product.name }}</p></div>
-                        <div style="flex:1"><p>R{{ item.product.price|floatformat:2 }}</p></div>
+
+                        <div style="flex:2"><p>{{ product.name }}</p></div>
+                        <div style="flex:1"><p>R{{ product.price|floatformat:2 }}</p></div>
                         <div style="flex:1">
-                            <p class="quantity">{{ item.quantity }}</p>
+
                             <div class="quantity"></div>
                         </div>
                         <div style="flex:1"><p>$32</p></div>

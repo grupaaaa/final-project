@@ -20,7 +20,7 @@ class Product(models.Model):
     measurement_unit = models.CharField(max_length=200,null=True)
     availability = models.BooleanField()
     image = models.ImageField(upload_to='images', null=True, blank=True)
-    # order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
+    order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -51,12 +51,12 @@ class Order(models.Model):
     def __str__(self):
         return f"Ordered by: {self.customer}, at: {self.order_date}"
 
-
-class OrderItem(models.Model):
-    item = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
-    quantity = models.IntegerField(default=1)
-    # customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+#
+# class OrderItem(models.Model):
+#     item = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
+#     quantity = models.IntegerField(default=1)
+#     # customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 

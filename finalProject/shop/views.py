@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-from .models import Product, Category, Order, OrderStatusChoice, OrderItem
+from .models import Product, Category, Order, OrderStatusChoice
 
 
 def get_product_detail(request, id):
@@ -54,9 +54,7 @@ def order_add(request, id):
     user = request.user
     order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
     product = Product.objects.get(id=id)
-    # order.product_set.add(product)
-    if "add_product_to_basket" in request.POST:
-        order.product_set.add(product)
+    order.product_set.add(product)
 
     return redirect("home")
 # @login_required(login_url="/users/login")
@@ -66,17 +64,11 @@ def order_add(request, id):
 #
 #     return render(request, "shop/basket.html", context=ctx)
 
-# def cart(request):
-#     if request.user.is_authenticated:
-#         user = request.user
-#         order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
-#         items = order.orderitem_set.all()
-#     else:
-#         items = []
-#
-#     context= {'items': items,
-#               'order': order}
-#     return render(request, 'shop/basket.html', context)
+class CartView(DetailView):
+    model = Order
+    context_object_name = 'product'
+    template_name = 'shop/basket.html'
+
 
 def checkout(request):
     context = {}
@@ -105,14 +97,14 @@ def checkout(request):
 #     product = Product.objects.get(id=id)
 #     cart.remove(product)
 #     return redirect("cart_detail")
+# # #
 # #
-#
-@login_required(login_url="/users/login")
-def item_increment(request, id):
-    orderitem = OrderItem(request)
-    product = Product.objects.get(id=id)
-    orderitem.add(product=product)
-    return redirect("shop/basket.html")
+# @login_required(login_url="/users/login")
+# def item_increment(request, id):
+#     orderitem = OrderItem(request)
+#     product = Product.objects.get(id=id)
+#     orderitem.add(product=product)
+#     return redirect("shop/basket.html")
 #
 #
 # @login_required(login_url="/users/login")
