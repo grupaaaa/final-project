@@ -1,25 +1,28 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-from .models import Product, Category
+
+from .models import Product, Category, Order, OrderStatusChoice
 
 
-class ProductDetailView(View):
-    model = Product
-    context_object_name = 'product'
-    template_name = 'shop/product_detail.html'
-    queryset = Product.objects.all()
+def get_product_detail(request, id):
+    product = Product.objects.get(id=id)
+    context = {'product': product}
 
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Product, pk=id)
 
-class CategoryListView(ListView):
-    model = Category
-    context_object_name = 'categories'
-    template_name = 'shop/category_list.html'
+    return render(request, "shop/product_detail.html",context)
+
+
+def get_categories(request):
+    categories = Category.objects.all()
+    ctx = {"categories": categories}
+
+    return render(request, "shop/category_list.html", context=ctx)
 
 
 class CategoryDetailView(DetailView):
@@ -29,16 +32,148 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['products'] = Product.objects.all()
-        context['products'] = Product.objects.filter(category = self.get_object())
+        context['products'] = Product.objects.filter(category=self.get_object())
+
         return context
 
 
+#
+
+# @login_required(login_url="/users/login")
+# def order_add(request, id):
+#     user = request.user
+#     order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
+#     item = Product.objects.get(id=id)
+#     # order.item_set.add(item)
+#     if "add_product_to_basket" in request.POST:
+#         order.item_set.add(item)
+#
+#     return redirect("home")
+
+def order_add(request, id):
+    user = request.user
+    order, created = Order.objects.get_or_create(customer=user, status=OrderStatusChoice.INITIAL)
+    product = Product.objects.get(id=id)
+    order.product_set.add(product)
+
+    return redirect("home")
+# @login_required(login_url="/users/login")
+# def cart(request):
+#     item = OrderItem.objects.all()
+#     ctx = {"item": item}
+#
+#     return render(request, "shop/basket.html", context=ctx)
+
+class CartView(DetailView):
+    model = Order
+    context_object_name = 'product'
+    template_name = 'shop/basket.html'
+
+
+def checkout(request):
+    context = {}
+    return render(request, 'shop/checkout.html', context)
 
 
 
+# @login_required(login_url="/users/login")
+# def update_order(request,id):
+#     order=Order.objects.all()
+#     try:
+#         product=Product.objects.get(id=id)
+#     except Product.DoesNotExist:
+#         pass
+#     if not product in order.products_set.all():
+#         order.products_set.add(product)
+#     else:
+#         order.products_set.remove(product)
+#     return HttpResponseRedirect("shop/basket.html")
 
 
+
+# @login_required(login_url="/users/login")
+# def item_clear(request, id):
+#     cart = Order(request)
+#     product = Product.objects.get(id=id)
+#     cart.remove(product)
+#     return redirect("cart_detail")
+# # #
+# #
+# @login_required(login_url="/users/login")
+# def item_increment(request, id):
+#     orderitem = OrderItem(request)
+#     product = Product.objects.get(id=id)
+#     orderitem.add(product=product)
+#     return redirect("shop/basket.html")
+#
+#
+# @login_required(login_url="/users/login")
+# def item_decrement(request, id):
+#     cart = Cart(request)
+#     product = Product.objects.get(id=id)
+#     cart.decrement(product=product)
+#     return redirect("cart_detail")
+#
+#
+# @login_required(login_url="/users/login")
+# def cart_clear(request):
+#     cart = Cart(request)
+#     cart.clear()
+#     return redirect("cart_detail")
+#
+class BreadAndBakingGoodsView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "bread_and_baking_goods.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+    # def context_category(self, **kwargs):
+    #     context = super().get_context_category(**kwargs)
+    #     context['products'] = Product.objects.filter(category=self.get_object())
+    #
+    #     return context
+
+
+class DairyProductsView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "dairy_products.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class FruitAndVegetablesView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "fruit_and_vegetables.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+class JuicesAndDrinksView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "juices_and_drinks.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class MeatView(TemplateView):
+    context_object_name = 'categories'
+    template_name = "meat.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 

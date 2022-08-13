@@ -1,3 +1,5 @@
-pythoDjango==4.0.6
+Django==4.0.6
 python-dotenv==0.17.1
-Pillow
+Pillow==9.2.0
+pytz==2022.1
+django-auto-logout==0.5.0

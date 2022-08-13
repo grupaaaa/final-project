@@ -1,18 +1,24 @@
-<html>
-  <body>
+{% extends 'main\base.html' %}
+{% block title %}
+<title>Product</title>
+{% endblock title %}
+
+{% block content %}
+        <p>{{ product.name }}</p>
+        <p>{{ product.price }}</p>
+        <p> {{ product.availability }}</p>
+        <p> {{ product.description|linebreaks }}</p>
     {% for product in products %}
-      <a href="products/{{ product.id }}">
-        <div>
-          <img src="{{ product.image.url }}">
-          <div>
-            <h3> {{ product.name }}</h3>
-             <h3> {{ product.price }}</h3>
-            <h3> {{ product. measurement_unit }}</h3>
-            <h3> {{ product.availability }}</h3>
-            <p> {{ product.description|linebreaks }}</p>
-          </div>
-        </div>
-      </a>
+        <a href="{%url 'shop:get_product_detail' product.id %}"> Product:
+<!--            <p>{{ product.name }}</p>-->
+<!--            <p>{{ product.price }}</p>-->
+<!--            <p> {{ product.availability }}</p>-->
+<!--            <p> {{ product.description|linebreaks }}</p>-->
+         </a>
     {% endfor%}
-  </body>
-</html>
+{% endblock content %}
+
+
+
+
+

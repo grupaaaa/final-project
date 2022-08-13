@@ -6,7 +6,11 @@
     <div>
         <h5>{{ product.name }}<h5/>
         <div>{{ product.price }}</div>
-        <img src="{{ product.image.url }}"/>
+        <div>{{ product.order }}</div>
+           <a href="{% url 'shop:order_add' product.id %}"> add to basket </a>
+
+
+
     </div>
     {% endfor %}
 </div>

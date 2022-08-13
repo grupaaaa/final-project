@@ -290,7 +290,7 @@ mydatabase
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-
+scratch.py
 # C extensions
 
 # Distribution / packaging

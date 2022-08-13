@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from shop.models import Product, Order
 
 User = get_user_model()
 
@@ -15,11 +18,9 @@ def register(request):
         # print(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/accounts/')
-
+            return redirect('/home/')
     else:
         form = UserCreationForm()
-
 
     context = {'form': form}
     return render(request, 'register.html', context)
@@ -43,3 +44,4 @@ def profile_functionalities(request):
 
 def basket_view(request):
     return render(request,'basket.html')
+
