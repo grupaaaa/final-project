@@ -25,12 +25,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Storage(models.Model):
-    amount = models.IntegerField(default=0)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+# class Storage(models.Model):
+#     amount = models.IntegerField(default=0)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+#
+#     def __str__(self):
+#         return self.name
 
-    def __str__(self):
-        return self.name
 
 class OrderStatusChoice(models.TextChoices):
     INITIAL = 'I', 'Initial'
@@ -43,17 +44,19 @@ class OrderStatusChoice(models.TextChoices):
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     status = models.CharField(max_length=20, default=OrderStatusChoice.INITIAL, choices=OrderStatusChoice.choices)
-    quantity = models.IntegerField(default=1)
+    # quantity = models.IntegerField(default=1)
     address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, blank=True, null=True)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"Ordered by: {self.customer}, at: {self.order_date}"
+        return f"Ordered by: {self.customer}, at: {self.order_date} , {self.id}"
 
-# class Cart (models.Model):
-#     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+#
+# class OrderItem(models.Model):
+#     item = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
 #     quantity = models.IntegerField(default=1)
-    # price = models.DecimalField(max_digits=12, decimal_places=2)
+#     # customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 
