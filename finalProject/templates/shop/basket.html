@@ -28,7 +28,7 @@
                     <div style="flex:1"><strong>Quantity</strong></div>
                     <div style="flex:1"><strong>Total</strong></div>
                 </div>
-                {% for product in object.order.product_set %}
+                {% for product in object.product_set.all %}
                     <div class="cart-row">
 
                         <div style="flex:2"><p>{{ product.name }}</p></div>
