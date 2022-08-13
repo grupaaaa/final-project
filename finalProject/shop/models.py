@@ -33,10 +33,6 @@ class Product(models.Model):
 #         return self.name
 
 
-
-    def __str__(self):
-        return self.name
-
 class OrderStatusChoice(models.TextChoices):
     INITIAL = 'I', 'Initial'
     ADDRESS = 'A', 'Address'
@@ -51,12 +47,6 @@ class Order(models.Model):
     # quantity = models.IntegerField(default=1)
     address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    items = models.ManyToManyField(OrderItem)
-    @property
-    def get_cart_items(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
-        return total
 
     def __str__(self):
         return f"Ordered by: {self.customer}, at: {self.order_date}"
