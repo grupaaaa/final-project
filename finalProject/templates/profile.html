@@ -2,8 +2,9 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-
         Hi {{ user.username }}! This is your account.
+        <div><a href="{% url 'accounts:password_change' %}">Change your password</a></div>
+
     {% else %}
 
 <form action= {% url "accounts:login" %} method="post">
