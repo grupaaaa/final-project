@@ -1,3 +1,4 @@
+
 <h1 class="head">{{ category.category }}</h1>
 
 <h3>Products for this category</h3>
@@ -5,8 +6,11 @@
     {% for product in products %}
     <div>
         <h5>{{ product.name }}<h5/>
-        <div>{{ product.price }}</div>
+             <img style='max-width: 10%' src="{{ product.image_url|default_if_none:'#' }}"/>
+        <div>{{ product.price }} zł </div>
+        <div>{{ product.product_description }}  </div>
         <div>{{ product.order }}</div>
+
            <a href="{% url 'shop:order_add' product.id %}"> add to basket </a>
 
 
