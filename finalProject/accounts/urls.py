@@ -1,12 +1,15 @@
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import path, include, reverse_lazy
-from accounts.views import register
+# from accounts.views import register
+from accounts.views import UserRegisterView
 
 app_name = 'accounts'
 
 urlpatterns = [
     path("", include("django.contrib.auth.urls")),
-    path('register/', register, name='register'),
+    # path('register/', register, name='register'),
+    path('register/', UserRegisterView.as_view(success_url=reverse_lazy("accounts:login")), name='register'),
+
     path('change_password/',
          PasswordChangeView.as_view(
              template_name="registration/password_change_form.html",
