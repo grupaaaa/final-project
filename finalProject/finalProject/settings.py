@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dotenv
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 dotenv.load_dotenv()
@@ -31,7 +30,8 @@ DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = []
 
-# Application definition
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -138,6 +138,3 @@ LOGOUT_REDIRECT_URL = "home"
 
 AUTO_LOGOUT = {'IDLE_TIME': timedelta(minutes=10)}
 
-# for reset password
-# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-# EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
