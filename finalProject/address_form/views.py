@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 
 
+
+
 class AddressFormView(TemplateView):
     template_name = "address_form/address_form.html"
 
@@ -28,4 +30,5 @@ def get_address(request):
         form = AddressForm()
 
     return render(request, 'address_form/address_form.html', {'form': form})
+
 

@@ -2,23 +2,30 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-
         Hi {{ user.username }}! This is your account.
+        <div><a href="{% url 'password_change' %}">Change your password</a></div>
+
+
     {% else %}
 
-<form action= {% url "accounts:login" %} method="post">
+<form action= {% url "login" %} method="post">
 
-{% csrf_token %}
+    {% csrf_token %}
     {{ login_form }}
     <input type="submit" value="Submit">
 
+    <br>
+    <div class="mt-5 text center">
+        <h5 class="mt-5">Forgot your password ?</h5>
+        <a href="{% url 'password_reset' %}" class="brn btn-primary">Reset password</a>
+    </div>
 
-
-  <!-- Register buttons -->
-  <div class="text-center">
-    <p>Not a member?</p>
-      <a class="nav-link" href="/accounts/register/">Register <span class="sr-only">(current)</span></a>
-  </div>
+    <br>
+      <!-- Register buttons -->
+      <div class="text-center">
+        <h5 class="mt-5">Not a member ?</h5>
+          <a class="nav-link" href="/accounts/register/">Register <span class="sr-only">(current)</span></a>
+      </div>
 </form>
 
 
