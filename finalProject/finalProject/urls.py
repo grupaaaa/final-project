@@ -37,7 +37,7 @@ urlpatterns = [
                 path('address/', get_address),
                 path('address/successful/', AddresSuccessfulView.as_view()),
                 path('profile/', profile_functionalities, name='profile'),
-                #path('basket/', basket_view, name='basket'),
+                path('shop/basket/', basket_view, name='shop/basket.html'),
                 path('home/bread_and_baking_goods', BreadAndBakingGoodsView.as_view()),
                 path('home/dairy_products', DairyProductsView.as_view()),
                 path('home/fruit_and_vegetables', FruitAndVegetablesView.as_view()),

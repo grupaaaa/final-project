@@ -38,7 +38,7 @@ def profile_functionalities(request):
 
 
 def basket_view(request):
-    return render(request,'basket.html')
+    return render(request,'shop/basket.html')
 
 def index(request):
     return render(request, 'user/index.html')
