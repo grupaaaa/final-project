@@ -7,8 +7,8 @@
 </center>
 
 ## About us
-Hello, we are group of four girls who are completing the Python from Basic course at Software Development Academy. 
-We decided to write some code with django to create an online store.
+Hello, we are  a group of four girls on the Python from Basics course at the Software Development Academy. 
+We have created and online store using Django.
 
 
 
