@@ -3,20 +3,7 @@
 
 
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}! This is Natural Life Organic Shop.
-
-
-{% else %}
 <div>
-  <p>You are not logged in</p>
-
-  <a href="{% url 'login' %}">Log In</a>
-
-{% endif %}
-
-<div>
-
 
 <img src=https://media.gettyimages.com/photos/healthy-fresh-rainbow-colored-fruits-and-vegetables-in-a-row-picture-id1208790364?s=2048x2048  class="center">
   <div class="col-md-12 text-center" style="margin:5px">

@@ -8,7 +8,7 @@ from accounts.views import UserRegisterView
 
 urlpatterns = [
     path("", include("django.contrib.auth.urls")),
-    path('register/', UserRegisterView.as_view(), name='register'),
+    path('register/', UserRegisterView.as_view(success_url=reverse_lazy('login')), name='register'),
     path('change_password/',
         PasswordChangeView.as_view(
             template_name="registration/password_change_form.html",
