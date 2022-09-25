@@ -1,16 +1,19 @@
-<h1 class="head">{{ category.category }}</h1>
+{% extends 'main/base.html' %}
 
-<h3>Products for this category</h3>
+
+{% block content %}
+<h3>{{ category.name }}</h3>
 <div>
     {% for product in products %}
     <div>
-        <h5>{{ product.name }}<h5/>
-        <div>{{ product.price }}</div>
-        <div>{{ product.order }}</div>
+        <img {{ product.image }}>
+        <h5><a href="{% url 'shop:product_detail' product.id %}"> {{ product.name }} </a><h5/>
+        <div>{{ product.price }} zł/{{ product.measurement_unit }}</div>
+        {% if product.order %}
+            <p>Product already in basket</p>
+        {% endif %}
            <a href="{% url 'shop:order_add' product.id %}"> add to basket </a>
-
-
-
     </div>
     {% endfor %}
 </div>
+{% endblock %}

@@ -5,17 +5,32 @@
 
 {% block content %}
         <p>{{ product.name }}</p>
-        <p>{{ product.price }}</p>
-        <p> {{ product.availability }}</p>
-        <p> {{ product.description|linebreaks }}</p>
-    {% for product in products %}
-        <a href="{%url 'shop:get_product_detail' product.id %}"> Product:
-<!--            <p>{{ product.name }}</p>-->
-<!--            <p>{{ product.price }}</p>-->
-<!--            <p> {{ product.availability }}</p>-->
-<!--            <p> {{ product.description|linebreaks }}</p>-->
-         </a>
-    {% endfor%}
+        <p>{{ product.price }} zł/{{ product.measurement_unit }}</p>
+
+
+
+        <p>{{ product.product_description}}</p>
+
+    {%  if product.availability %}
+        <p>Available {{ product.quantity }}{{ product.measurement_unit }} </p>
+        <a href="{% url 'shop:order_add' product.id %}"> add to basket </a>
+    {% else %}
+        <p> Sorry {{ product.name }} is inaccessible </p>
+    {% endif %}
+    <div>
+    <a href="{% url 'shop:category_detail' product.id %}"> Back to category </a>
+    </div>
+
+
+{#        <p> {{ product.description|linebreaks }}</p>#}
+{#    {% for product in products %}#}
+{#        <a href="{%url 'shop:get_product_detail' product.id %}"> Product:#}
+{#<!--            <p>{{ product.name }}</p>-->#}
+{#<!--            <p>{{ product.price }}</p>-->#}
+{#<!--            <p> {{ product.availability }}</p>-->#}
+{#<!--            <p> {{ product.description|linebreaks }}</p>-->#}
+{#         </a>#}
+{#    {% endfor%}#}
 {% endblock content %}
 
 

@@ -5,9 +5,12 @@ from django import forms
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
+    # username = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # password1 = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # password2 = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')

@@ -1,32 +1,63 @@
 {% extends 'main/base.html' %}
 
+
 {% block content %}
+
+
+
     {% if user.is_authenticated %}
-        Hi {{ user.username }}! This is your account.
-        <div><a href="{% url 'password_change' %}">Change your password</a></div>
+        <h3 class="card-title mt-3 text-center" xmlns="http://www.w3.org/1999/html">Hi {{ user.username }}! This is your account.</h3>
+        <article class="card-body mx-auto" style="max-width: 450px;">
+        <div class="shadow p-4 mb-5 bg-body rounded">
+                <h5 class="card-title mt-3 text-center">Account settings</h5>
+                <div><a href="{% url 'password_change' %}">Change your password</a></div>
+        </div>
+        </article>
+
+
+             <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+
+
+{#    <div class="conrainer-md">#}
+{#        <div class="row">#}
+{#            <div class="col-sm">1</div>#}
+{#            <div class="col-sm">2</div>#}
+{#            <div class="col-sm">3</div>#}
+{#        </div>#}
+{#    </div>#}
 
 
     {% else %}
 
-<form action= {% url "login" %} method="post">
+        <form action= {% url "login" %} method="post">
 
-    {% csrf_token %}
-    {{ login_form }}
-    <input type="submit" value="Submit">
+            <article class="card-body mx-auto" style="max-width: 450px;">
+                <div class="shadow p-4 mb-5 bg-body rounded">
+                    <h3 class="card-title mt-3 text-center">Sign In</h3>
 
-    <br>
-    <div class="mt-5 text center">
-        <h5 class="mt-5">Forgot your password ?</h5>
-        <a href="{% url 'password_reset' %}" class="brn btn-primary">Reset password</a>
-    </div>
+                {% csrf_token %}
+                <div class="form-group">
+                    {% for field in login_form %}
+                        <div class="form-group">
+                            {{ field.label }}
+                            {{ field }}
+                        </div>
 
-    <br>
-      <!-- Register buttons -->
-      <div class="text-center">
-        <h5 class="mt-5">Not a member ?</h5>
-          <a class="nav-link" href="/accounts/register/">Register <span class="sr-only">(current)</span></a>
-      </div>
-</form>
+                    {% endfor %}
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Submit">
+
+
+            <br>
+            <p class="text-center">Forgot your password ?
+                <a href="{% url 'password_reset' %}" >Reset password<span class="sr-only">(current)</span></a>
+            </p>
+
+              <p class="text-center">Not a member ?
+                  <a href="/accounts/register/">Register <span class="sr-only">(current)</span></a>
+              </p>
+            </article>
+        </form>
 
 
     {% endif %}
