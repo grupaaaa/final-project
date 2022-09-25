@@ -4,6 +4,7 @@ from django.db import models
 
 from accounts.models import User
 from address_form.models import ShippingAddress
+from decimal import Decimal
 
 
 class Category(models.Model):
@@ -12,13 +13,14 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    name = models.CharField(max_length=200,null=True)
-    price = models.DecimalField(max_digits=12, decimal_places=2)
+    name = models.CharField(max_length=200, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
     product_description = models.CharField(
         max_length=250, default='', blank=True, null=True)
-    measurement_unit = models.CharField(max_length=200,null=True)
-    availability = models.BooleanField()
+    measurement_unit = models.CharField(max_length=200, null=True)
+    quantity = models.DecimalField(max_digits=12, decimal_places=2)
+    availability = models.BooleanField(default=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
 
