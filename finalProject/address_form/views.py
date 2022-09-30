@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -17,8 +17,9 @@ class AddressFormView(TemplateView):
 
 class AddresSuccessfulView(TemplateView):
     template_name = "address_form/address_successful.html"
-
-
+#
+class Error(TemplateView):
+    template_name = "address_form/error.html"
 
 def get_address(request):
     if request.method == 'POST':
@@ -26,8 +27,11 @@ def get_address(request):
         if form.is_valid():
             form.save(commit=True)
             return HttpResponseRedirect('successful/')
+        else:
+            return render(request, "address_form/error.html")
     else:
         form = AddressForm()
+
 
     return render(request, 'address_form/address_form.html', {'form': form})
 
