@@ -10,6 +10,7 @@ from decimal import Decimal
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+
     def __str__(self):
         return self.name
 
@@ -27,9 +28,7 @@ class Product(models.Model):
         max_length=250, default='', blank=True, null=True)
     measurement_unit = models.CharField(max_length=20, choices=measurement)
     availability = models.CharField(max_length=20, choices=availability_status)
-    measurement_unit = models.CharField(max_length=200, null=True)
     quantity = models.DecimalField(max_digits=12, decimal_places=2)
-    availability = models.BooleanField(default=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     order = models.ForeignKey("Order", on_delete=models.CASCADE, null=True, blank=True)
 
@@ -49,19 +48,10 @@ class OrderStatusChoice(models.TextChoices):
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     status = models.CharField(max_length=20, default=OrderStatusChoice.INITIAL, choices=OrderStatusChoice.choices)
-    # quantity = models.IntegerField(default=1)
     address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE, blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"Ordered by: {self.customer}, at: {self.order_date} , {self.id}"
-
-#
-# class OrderItem(models.Model):
-#     item = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
-#     quantity = models.IntegerField(default=1)
-#     # customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
 
 
