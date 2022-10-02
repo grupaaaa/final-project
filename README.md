@@ -7,14 +7,14 @@
 </center>
 
 ## About us
-Hello, we are group of four girls which finishing Python from basic course in SDA Programing School. 
-We decided to write some code with django to create an online store.
+Hello, we are  a group of four girls on the Python from Basics course at the Software Development Academy. 
+We have created and online store using Django.
 
 
 
-## To run a project
+## To run the project
 
-If you want to run this project yourself, you need to install git and some python interpreter like Pycharm on your computer and follow these steps
+If you want to run this project yourself, you need to install git and a python interpreter like Pycharm on your computer and follow these steps
 * in git: git  clone https://github.com/grupaaaa/final-project.git
 * open project in PyCharm and create venv for it
 * create .env file in next to env.example.txt in finalProject file and copy his context to new file

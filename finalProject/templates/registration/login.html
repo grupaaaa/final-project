@@ -1,12 +1,32 @@
 <!-- templates/registration/login.html -->
-{% extends 'main\base.html' %}
+{% extends 'main/base.html' %}
 
 
 {% block content %}
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+    <article class="card-body mx-auto" style="max-width: 450px;">
+    <div class="shadow p-4 mb-5 bg-body rounded">
+        <h3 class="card-title mt-3 text-center">Sign In</h3>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+{#            obsługa błędów ładniejsza ale się nie słucha#}
+{#            {% for field in form %}#}
+{#                <div class="form-group">#}
+{#                    {{ field.label }}#}
+{#                    {{ field }}#}
+{#                </div>#}
+{##}
+{#                {% if field.errors %}#}
+{#                        <div class="field-error">#}
+{#                            {{ error_message }}#}
+{#                        </div>#}
+{#                {% endif %}#}
+{##}
+{#            {% endfor %}#}
+
+          <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        </form>
+    </div>
+    </article>
 {% endblock %}
