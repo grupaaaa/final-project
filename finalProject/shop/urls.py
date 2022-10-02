@@ -1,5 +1,8 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+
+from finalProject import settings
 from shop.views import get_categories, CategoryDetailView, get_product_detail, checkout, CartView, order_add
 
 from django.urls import path
@@ -13,6 +16,6 @@ urlpatterns = [
     path('order_add/<int:id>', order_add, name='order_add'),
     path('basket/<int:pk>', CartView.as_view(), name='cart'),
     path('checkout/', checkout, name='checkout'),
-    # path('basket_detail/<int:pk>', checkout, name='basket_detail'),
 
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
